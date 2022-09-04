@@ -19,44 +19,45 @@ pkgver=0.24.1
 pkgrel=2
 pkgdesc='Streamlined Cython bindings for the harfbuzz shaping engine'
 arch=(x86_64)
-url="https://github.com/harfbuzz/$_project"
+url="https://github.com/harfbuzz/${_relname}"
 license=(Apache)
 depends=(
-	"python"
-	)
+  "python"
+)
 makedepends=(
-	"cython"
-             python-{build,installer}
-             "python-setuptools-scm"
-             "python-scikit-build"
-             "python-wheel"
-						 )
+  "cython"
+  "python-build"
+  "python-installer"
+  "python-setuptools-scm"
+  "python-scikit-build"
+  "python-wheel"
+)
 checkdepends=(
-	"python-pytest"
+  "python-pytest"
 )
 source=(
-	"https://files.pythonhosted.org/packages/source/${pkgname::1}/${_relname}/${_relname}-${pkgver}.zip"
-	)
+  "https://files.pythonhosted.org/packages/source/${pkgname::1}/${_relname}/${_relname}-${pkgver}.zip"
+)
 sha512sums=(
-	"61c601a1cccd20d316327d8ba743fb768c9ebccc4602a455369df54a039278a569eddae9a9df3ec9b09ef966308aa688aab32eaa6c7713cdf480104876a801f4"
-	)
+  "61c601a1cccd20d316327d8ba743fb768c9ebccc4602a455369df54a039278a569eddae9a9df3ec9b09ef966308aa688aab32eaa6c7713cdf480104876a801f4"
+)
 
 build() {
 
-	cd "${_relname}-${pkgver}"
+  cd "${_relname}-${pkgver}"
 
-	python -m build -wn
+  python -m build -wn
 }
 
 package() {
 
-	cd "${_relname}-${pkgver}"
+  cd "${_relname}-${pkgver}"
 
-	pytest
+  pytest
 }
 
 package() {
-	cd "${_relname}-${pkgver}"
+  cd "${_relname}-${pkgver}"
 
-	python -m installer -d "$pkgdir" dist/*.whl
+  python -m installer -d "$pkgdir" dist/*.whl
 }
